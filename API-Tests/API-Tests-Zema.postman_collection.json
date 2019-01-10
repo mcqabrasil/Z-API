@@ -1,0 +1,1377 @@
+{
+	"info": {
+		"_postman_id": "bc8436d3-7f65-41c5-baf5-06c4b3a715e3",
+		"name": "API-Tests-Zema",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": " Intelipost - Cotação de frete",
+			"item": [
+				{
+					"name": "PDP",
+					"item": [
+						{
+							"name": "CEP Valido - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c83fe556-6365-40ee-8000-96969017e779",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{AuthPassword}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{AuthUser}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "c2FsbWVpZGFAbWNmYWR5ZW4uY29tOkFzZHF3ZTEyMyMjIw==",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "",
+										"name": "Content-Type",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{ICS-Stage}}-a522860.integration.us2.oraclecloud.com/integration/flowapi/rest/CEP_INTEGRATION/v01/ccadmin/v1/cep/88034102",
+									"protocol": "https",
+									"host": [
+										"{{ICS-Stage}}-a522860",
+										"integration",
+										"us2",
+										"oraclecloud",
+										"com"
+									],
+									"path": [
+										"integration",
+										"flowapi",
+										"rest",
+										"CEP_INTEGRATION",
+										"v01",
+										"ccadmin",
+										"v1",
+										"cep",
+										"88034102"
+									]
+								},
+								"description": "Requisição com CEP Valido - status 200"
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta CEP - Unauthorized",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "68be51c7-b1b7-4cad-8836-e113bdaf6659",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{ICS-Stage}}-a522860.integration.us2.oraclecloud.com/integration/flowapi/rest/CEP_INTEGRATION/v01/ccadmin/v1/cep/88034102",
+									"protocol": "https",
+									"host": [
+										"{{ICS-Stage}}-a522860",
+										"integration",
+										"us2",
+										"oraclecloud",
+										"com"
+									],
+									"path": [
+										"integration",
+										"flowapi",
+										"rest",
+										"CEP_INTEGRATION",
+										"v01",
+										"ccadmin",
+										"v1",
+										"cep",
+										"88034102"
+									]
+								},
+								"description": "Get de Consulta de CEP sem fornecer credenciais de Authorization"
+							},
+							"response": []
+						},
+						{
+							"name": "CEP Vazio - Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0851d806-6031-4e7e-ad38-4e34d5ad87d5",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{AuthPassword}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{AuthUser}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{ICS-Stage}}-a522860.integration.us2.oraclecloud.com/integration/flowapi/rest/CEP_INTEGRATION/v01/ccadmin/v1/cep/",
+									"protocol": "https",
+									"host": [
+										"{{ICS-Stage}}-a522860",
+										"integration",
+										"us2",
+										"oraclecloud",
+										"com"
+									],
+									"path": [
+										"integration",
+										"flowapi",
+										"rest",
+										"CEP_INTEGRATION",
+										"v01",
+										"ccadmin",
+										"v1",
+										"cep",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CEP Invalido - Menos Digitos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b4051bbf-6861-42ba-baff-63d584ab3052",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre quantidade de caracteres enviado\", function () {",
+											"    pm.response.to.be.withBody;",
+											"    pm.expect(pm.response.text()).to.include(\"BUSCA DEFINIDA COMO EXATA, 0 CEP DEVE TER 8 DIGITOS\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{AuthPassword}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{AuthUser}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{ICS-Stage}}-a522860.integration.us2.oraclecloud.com/integration/flowapi/rest/CEP_INTEGRATION/v01/ccadmin/v1/cep/8803410",
+									"protocol": "https",
+									"host": [
+										"{{ICS-Stage}}-a522860",
+										"integration",
+										"us2",
+										"oraclecloud",
+										"com"
+									],
+									"path": [
+										"integration",
+										"flowapi",
+										"rest",
+										"CEP_INTEGRATION",
+										"v01",
+										"ccadmin",
+										"v1",
+										"cep",
+										"8803410"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CEP Invalido - Não encontrado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "954a275a-7f64-40f8-bc4e-9d9e0cb14e6a",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação de CEP não encontrado\", function () {",
+											"    pm.response.to.be.withBody;",
+											"    pm.expect(pm.response.text()).to.include(\"CEP NAO ENCONTRADO\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{AuthPassword}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{AuthUser}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://{{ICS-Stage}}-a522860.integration.us2.oraclecloud.com/integration/flowapi/rest/CEP_INTEGRATION/v01/ccadmin/v1/cep/88888888",
+									"protocol": "https",
+									"host": [
+										"{{ICS-Stage}}-a522860",
+										"integration",
+										"us2",
+										"oraclecloud",
+										"com"
+									],
+									"path": [
+										"integration",
+										"flowapi",
+										"rest",
+										"CEP_INTEGRATION",
+										"v01",
+										"ccadmin",
+										"v1",
+										"cep",
+										"88888888"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "03acf9b1-9981-4e85-ae20-d3a2841f59bd",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"shippingAddress\": {\n    \"lastName\": \"teste\",\n    \"country\": \"Brasil\",\n    \"address3\": \"\",\n    \"address2\": \"\",\n    \"city\": \"Araxá\",\n    \"prefix\": \"\",\n    \"address1\": \"Rua Celina Souza Silva\",\n    \"defaultCountryCode\": \"BR\",\n    \"postalCode\": 38183123,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"county\": \"Centro\",\n    \"isDefaultAddress\": true,\n    \"suffix\": \"\",\n    \"selectedCountry\": \"BR\",\n    \"firstName\": \"teste\",\n    \"phoneNumber\": \"\",\n    \"alias\": \"\",\n    \"faxNumber\": \"\",\n    \"middleName\": \"\",\n    \"state\": \"MG\",\n    \"selectedState\": \"\",\n    \"email\": \"teste\",\n    \"state_ISOCode\": \"\"\n  },\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 717.45,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 717.45\n  },\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"98863\",\n      \"catRefId\": \"124504\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 717.45\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dados Endereco em branco - Validação País",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "03acf9b1-9981-4e85-ae20-d3a2841f59bd",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Endereço de entrega inválido - sem País\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"Endereço de entrega inválido\");",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"Nenhum país especificado\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"shippingAddress\": {\n    \"lastName\": \"\",\n    \"country\": \"\",\n    \"address3\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"prefix\": \"\",\n    \"address1\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"postalCode\": \"\",\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"county\": \"\",\n    \"isDefaultAddress\": \"\",\n    \"suffix\": \"\",\n    \"selectedCountry\": \"\",\n    \"firstName\": \"\",\n    \"phoneNumber\": \"\",\n    \"alias\": \"\",\n    \"faxNumber\": \"\",\n    \"middleName\": \"\",\n    \"state\": \"\",\n    \"selectedState\": \"\",\n    \"email\": \"\",\n    \"state_ISOCode\": \"\"\n  },\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 717.45,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 717.45\n  },\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"98863\",\n      \"catRefId\": \"124504\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 717.45\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Validação Estado e Região",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "03acf9b1-9981-4e85-ae20-d3a2841f59bd",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Endereço de entrega inválido - sem País\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"Endereço de entrega inválido\");",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"Estado/região não especificada\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"shippingAddress\": {\n    \"lastName\": \"\",\n    \"country\": \"Brasil\",\n    \"address3\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"prefix\": \"\",\n    \"address1\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"postalCode\": \"\",\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"county\": \"\",\n    \"isDefaultAddress\": \"\",\n    \"suffix\": \"\",\n    \"selectedCountry\": \"\",\n    \"firstName\": \"\",\n    \"phoneNumber\": \"\",\n    \"alias\": \"\",\n    \"faxNumber\": \"\",\n    \"middleName\": \"\",\n    \"state\": \"\",\n    \"selectedState\": \"\",\n    \"email\": \"\",\n    \"state_ISOCode\": \"\"\n  },\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 717.45,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 717.45\n  },\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"98863\",\n      \"catRefId\": \"124504\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 717.45\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Validação Codigo Postal Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "03acf9b1-9981-4e85-ae20-d3a2841f59bd",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Endereço de entrega inválido - sem País\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"Endereço de entrega inválido\");",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"Código postal não especificado\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"shippingAddress\": {\n    \"lastName\": \"\",\n    \"country\": \"Brasil\",\n    \"address3\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"prefix\": \"\",\n    \"address1\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"postalCode\": \"\",\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"county\": \"\",\n    \"isDefaultAddress\": \"\",\n    \"suffix\": \"\",\n    \"selectedCountry\": \"\",\n    \"firstName\": \"\",\n    \"phoneNumber\": \"\",\n    \"alias\": \"\",\n    \"faxNumber\": \"\",\n    \"middleName\": \"\",\n    \"state\": \"XX\",\n    \"selectedState\": \"\",\n    \"email\": \"\",\n    \"state_ISOCode\": \"\"\n  },\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 717.45,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 717.45\n  },\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"98863\",\n      \"catRefId\": \"124504\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 717.45\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Validação Codigo Postal Invalido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "03acf9b1-9981-4e85-ae20-d3a2841f59bd",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Endereço de entrega inválido - sem País\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"Endereço de entrega inválido\");",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"Falha na atualização. O endereço de remessa não é um endereço válido.\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"shippingAddress\": {\n    \"lastName\": \"\",\n    \"country\": \"Brasil\",\n    \"address3\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"prefix\": \"\",\n    \"address1\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"postalCode\": 123,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"county\": \"\",\n    \"isDefaultAddress\": \"\",\n    \"suffix\": \"\",\n    \"selectedCountry\": \"\",\n    \"firstName\": \"\",\n    \"phoneNumber\": \"\",\n    \"alias\": \"\",\n    \"faxNumber\": \"\",\n    \"middleName\": \"\",\n    \"state\": \"XX\",\n    \"selectedState\": \"\",\n    \"email\": \"\",\n    \"state_ISOCode\": \"\"\n  },\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 717.45,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 717.45\n  },\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"98863\",\n      \"catRefId\": \"124504\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 717.45\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Validação Campos Obrigatorios Shipping",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "03acf9b1-9981-4e85-ae20-d3a2841f59bd",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"shippingAddress\": {\n    \"lastName\": \"\",\n    \"country\": \"Brasil\",\n    \"address3\": \"\",\n    \"address2\": \"\",\n    \"city\": \"\",\n    \"prefix\": \"\",\n    \"address1\": \"\",\n    \"defaultCountryCode\": \"BR\",\n    \"postalCode\": 38183123,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"county\": \"\",\n    \"isDefaultAddress\": \"\",\n    \"suffix\": \"\",\n    \"selectedCountry\": \"BR\",\n    \"firstName\": \"\",\n    \"phoneNumber\": \"\",\n    \"alias\": \"\",\n    \"faxNumber\": \"\",\n    \"middleName\": \"\",\n    \"state\": \"MG\",\n    \"selectedState\": \"\",\n    \"email\": \"\",\n    \"state_ISOCode\": \"\"\n  },\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 717.45,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 717.45\n  },\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"98863\",\n      \"catRefId\": \"124504\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 717.45\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Produto Sem Dimensões",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f6fb709f-cb72-4451-aafc-2fba62893636",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"",
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
+											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+											"});",
+											"pm.test(\"O unico frete disponivel deve ser Retirar em loja\", function () {",
+											"    pm.expect(jsonData.items.length).to.eql(1);",
+											"    pm.expect(jsonData.items[0].displayName).to.eql(\"Retirar em Loja\");",
+											"    pm.expect(jsonData.items[0].taxCode).to.eql(\"LOJA\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"shippingAddress\": {\n    \"lastName\": \"teste\",\n    \"country\": \"Brasil\",\n    \"address3\": \"\",\n    \"address2\": \"\",\n    \"city\": \"Araxá\",\n    \"prefix\": \"\",\n    \"address1\": \"Rua Celina Souza Silva\",\n    \"defaultCountryCode\": \"BR\",\n    \"postalCode\": 38183123,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"county\": \"Centro\",\n    \"isDefaultAddress\": true,\n    \"suffix\": \"\",\n    \"selectedCountry\": \"BR\",\n    \"firstName\": \"teste\",\n    \"phoneNumber\": \"\",\n    \"alias\": \"\",\n    \"faxNumber\": \"\",\n    \"middleName\": \"\",\n    \"state\": \"MG\",\n    \"selectedState\": \"\",\n    \"email\": \"teste\",\n    \"state_ISOCode\": \"\"\n  },\n  \"priceInfo\": {\n    \"amount\": 827.84,\n    \"total\": 827.84,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 827.84,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 827.84\n  },\n  \"productIdForShippingSurcharge\": [\n    \"100077\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"100077\",\n      \"catRefId\": \"125807\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 827.84\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Sem  Dados de Endereco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "248c68c1-0120-4ae4-ab47-56c6f6a3774f",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre a falta dos campos de Endereço\", function () {",
+											"    pm.response.to.be.withBody;",
+											"    pm.expect(pm.response.text()).to.include(\"Dados de endereço de entrega vazio\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 717.45,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 717.45\n  },\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"98863\",\n      \"catRefId\": \"124504\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 717.45\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Carrinho",
+					"item": [
+						{
+							"name": "Calcula Frete - Um Produto - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5ad07a99-8122-4176-8704-b9d72dd597a5",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 717.45,\n    \"shipping\": 0,\n    \"totalWithoutTax\": 717.45,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010498\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"\",\n      \"childItems\": null,\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 717.45\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"\",\n    \"prefix\": \"\",\n    \"firstName\": \"\",\n    \"middleName\": \"\",\n    \"lastName\": \"\",\n    \"suffix\": \"\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"38183123\",\n    \"address1\": \"Centro\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"Araxá\",\n    \"state\": \"Minas Gerais\",\n    \"county\": \"\",\n    \"phoneNumber\": \"\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"type\": \"\",\n    \"repositoryId\": \"\",\n    \"dynamicPropertyMetaInfo\": {\n      \"dynamicPropertyMetaCache\": {}\n    },\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"computedDefaultBilling\": false,\n    \"computedDefaultShipping\": false,\n    \"selectedCountry\": \"BR\",\n    \"selectedState\": \"MG\",\n    \"state_ISOCode\": \"BR-MG\",\n    \"defaultCountryCode\": \"BR\",\n    \"isDefaultAddress\": false,\n    \"computedCountry\": [\n      \"BR\"\n    ],\n    \"computedState\": [\n      \"MG\"\n    ]\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dois Produtos - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "da2dd2c6-5f0a-4505-89fe-db40fd64b44f",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\",\n    \"92237\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 1145.3,\n    \"total\": 1145.3,\n    \"shipping\": 0,\n    \"totalWithoutTax\": 1145.3,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 1145.3,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010513\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"\",\n      \"childItems\": null,\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 717.45\n    },\n    {\n      \"productId\": \"92237\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010514\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"116995\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 10,\n      \"selectedOptions\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 568.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 427.85,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 427.85,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"Pneu Firestone F600 205/55R 16 91V\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010514\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 427.85\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"\",\n    \"prefix\": \"\",\n    \"firstName\": \"\",\n    \"middleName\": \"\",\n    \"lastName\": \"\",\n    \"suffix\": \"\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"38183123\",\n    \"address1\": \"Centro\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"Araxá\",\n    \"state\": \"Minas Gerais\",\n    \"county\": \"\",\n    \"phoneNumber\": \"\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"type\": \"\",\n    \"repositoryId\": \"\",\n    \"dynamicPropertyMetaInfo\": {\n      \"dynamicPropertyMetaCache\": {}\n    },\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"computedDefaultBilling\": false,\n    \"computedDefaultShipping\": false,\n    \"selectedCountry\": \"BR\",\n    \"selectedState\": \"MG\",\n    \"state_ISOCode\": \"BR-MG\",\n    \"defaultCountryCode\": \"BR\",\n    \"isDefaultAddress\": false,\n    \"computedCountry\": [\n      \"BR\"\n    ],\n    \"computedState\": [\n      \"MG\"\n    ]\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dois Produtos - Validação País",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "da2dd2c6-5f0a-4505-89fe-db40fd64b44f",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Endereço de entrega inválido - sem País\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"Endereço de entrega inválido\");",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"Nenhum país especificado\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\",\n    \"92237\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 1145.3,\n    \"total\": 1145.3,\n    \"shipping\": 0,\n    \"totalWithoutTax\": 1145.3,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 1145.3,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010513\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"\",\n      \"childItems\": null,\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 717.45\n    },\n    {\n      \"productId\": \"92237\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010514\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"116995\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 10,\n      \"selectedOptions\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 568.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 427.85,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 427.85,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"Pneu Firestone F600 205/55R 16 91V\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010514\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 427.85\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"\",\n    \"prefix\": \"\",\n    \"firstName\": \"\",\n    \"middleName\": \"\",\n    \"lastName\": \"\",\n    \"suffix\": \"\",\n    \"country\": \"\",\n    \"postalCode\": \"\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"county\": \"\",\n    \"phoneNumber\": \"\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"type\": \"\",\n    \"repositoryId\": \"\",\n    \"dynamicPropertyMetaInfo\": {\n      \"dynamicPropertyMetaCache\": {}\n    },\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"computedDefaultBilling\": false,\n    \"computedDefaultShipping\": false,\n    \"selectedCountry\": \"\",\n    \"selectedState\": \"\",\n    \"state_ISOCode\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"isDefaultAddress\": false,\n    \"computedCountry\": [\n      \"\"\n    ],\n    \"computedState\": [\n      \"\"\n    ]\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dois Produtos - Validação Estado Região",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "da2dd2c6-5f0a-4505-89fe-db40fd64b44f",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Endereço de entrega inválido - sem País\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"Endereço de entrega inválido\");",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"Estado/região não especificada\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\",\n    \"92237\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 1145.3,\n    \"total\": 1145.3,\n    \"shipping\": 0,\n    \"totalWithoutTax\": 1145.3,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 1145.3,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010513\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"\",\n      \"childItems\": null,\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 717.45\n    },\n    {\n      \"productId\": \"92237\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010514\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"116995\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 10,\n      \"selectedOptions\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 568.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 427.85,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 427.85,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"Pneu Firestone F600 205/55R 16 91V\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010514\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 427.85\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"\",\n    \"prefix\": \"\",\n    \"firstName\": \"\",\n    \"middleName\": \"\",\n    \"lastName\": \"\",\n    \"suffix\": \"\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"\",\n    \"state\": \"\",\n    \"county\": \"\",\n    \"phoneNumber\": \"\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"type\": \"\",\n    \"repositoryId\": \"\",\n    \"dynamicPropertyMetaInfo\": {\n      \"dynamicPropertyMetaCache\": {}\n    },\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"computedDefaultBilling\": false,\n    \"computedDefaultShipping\": false,\n    \"selectedCountry\": \"\",\n    \"selectedState\": \"\",\n    \"state_ISOCode\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"isDefaultAddress\": false,\n    \"computedCountry\": [\n      \"\"\n    ],\n    \"computedState\": [\n      \"\"\n    ]\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dois Produtos - Validação Codigo Postal Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "da2dd2c6-5f0a-4505-89fe-db40fd64b44f",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Endereço de entrega inválido - sem País\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"Endereço de entrega inválido\");",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"Código postal não especificado\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\",\n    \"92237\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 1145.3,\n    \"total\": 1145.3,\n    \"shipping\": 0,\n    \"totalWithoutTax\": 1145.3,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 1145.3,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010513\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"\",\n      \"childItems\": null,\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 717.45\n    },\n    {\n      \"productId\": \"92237\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010514\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"116995\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 10,\n      \"selectedOptions\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 568.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 427.85,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 427.85,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"Pneu Firestone F600 205/55R 16 91V\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010514\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 427.85\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"\",\n    \"prefix\": \"\",\n    \"firstName\": \"\",\n    \"middleName\": \"\",\n    \"lastName\": \"\",\n    \"suffix\": \"\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"\",\n    \"state\": \"XX\",\n    \"county\": \"\",\n    \"phoneNumber\": \"\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"type\": \"\",\n    \"repositoryId\": \"\",\n    \"dynamicPropertyMetaInfo\": {\n      \"dynamicPropertyMetaCache\": {}\n    },\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"computedDefaultBilling\": false,\n    \"computedDefaultShipping\": false,\n    \"selectedCountry\": \"\",\n    \"selectedState\": \"\",\n    \"state_ISOCode\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"isDefaultAddress\": false,\n    \"computedCountry\": [\n      \"\"\n    ],\n    \"computedState\": [\n      \"\"\n    ]\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dois Produtos - Validação Codigo Postal Invalido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "da2dd2c6-5f0a-4505-89fe-db40fd64b44f",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Endereço de entrega inválido - sem País\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"Endereço de entrega inválido\");",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"Falha na atualização. O endereço de remessa não é um endereço válido.\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\",\n    \"92237\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 1145.3,\n    \"total\": 1145.3,\n    \"shipping\": 0,\n    \"totalWithoutTax\": 1145.3,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 1145.3,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010513\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"\",\n      \"childItems\": null,\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 717.45\n    },\n    {\n      \"productId\": \"92237\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010514\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"116995\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 10,\n      \"selectedOptions\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 568.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 427.85,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 427.85,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"Pneu Firestone F600 205/55R 16 91V\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010514\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 427.85\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"\",\n    \"prefix\": \"\",\n    \"firstName\": \"\",\n    \"middleName\": \"\",\n    \"lastName\": \"\",\n    \"suffix\": \"\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"38183123\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"\",\n    \"state\": \"XX\",\n    \"county\": \"\",\n    \"phoneNumber\": \"\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"type\": \"\",\n    \"repositoryId\": \"\",\n    \"dynamicPropertyMetaInfo\": {\n      \"dynamicPropertyMetaCache\": {}\n    },\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"computedDefaultBilling\": false,\n    \"computedDefaultShipping\": false,\n    \"selectedCountry\": \"\",\n    \"selectedState\": \"\",\n    \"state_ISOCode\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"isDefaultAddress\": false,\n    \"computedCountry\": [\n      \"\"\n    ],\n    \"computedState\": [\n      \"\"\n    ]\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dois Produtos - Validação Campos Obrigatorios Shipping",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "da2dd2c6-5f0a-4505-89fe-db40fd64b44f",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\",\n    \"92237\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 1145.3,\n    \"total\": 1145.3,\n    \"shipping\": 0,\n    \"totalWithoutTax\": 1145.3,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 1145.3,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010513\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"\",\n      \"childItems\": null,\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 717.45\n    },\n    {\n      \"productId\": \"92237\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010514\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"116995\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 10,\n      \"selectedOptions\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 568.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 427.85,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 427.85,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"Pneu Firestone F600 205/55R 16 91V\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010514\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 427.85\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"\",\n    \"prefix\": \"\",\n    \"firstName\": \"\",\n    \"middleName\": \"\",\n    \"lastName\": \"\",\n    \"suffix\": \"\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"38183123\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"\",\n    \"state\": \"Minas Gerais\",\n    \"county\": \"\",\n    \"phoneNumber\": \"\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"type\": \"\",\n    \"repositoryId\": \"\",\n    \"dynamicPropertyMetaInfo\": {\n      \"dynamicPropertyMetaCache\": {}\n    },\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"computedDefaultBilling\": false,\n    \"computedDefaultShipping\": false,\n    \"selectedCountry\": \"BR\",\n    \"selectedState\": \"\",\n    \"state_ISOCode\": \"\",\n    \"defaultCountryCode\": \"\",\n    \"isDefaultAddress\": false,\n    \"computedCountry\": [\n      \"\"\n    ],\n    \"computedState\": [\n      \"\"\n    ]\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dois Produtos - Sem Dados Endereço",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "da2dd2c6-5f0a-4505-89fe-db40fd64b44f",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre a falta dos campos de Endereço\", function () {",
+											"    pm.response.to.be.withBody;",
+											"    pm.expect(pm.response.text()).to.include(\"Dados de endereço de entrega vazio\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\",\n    \"92237\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 1145.3,\n    \"total\": 1145.3,\n    \"shipping\": 0,\n    \"totalWithoutTax\": 1145.3,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 1145.3,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010513\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"\",\n      \"childItems\": null,\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 717.45\n    },\n    {\n      \"productId\": \"92237\",\n      \"quantity\": 1,\n      \"repositoryId\": \"ci60010514\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"116995\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 10,\n      \"selectedOptions\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 568.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 427.85,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 427.85,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"desconto_manual\": \"0\",\n      \"displayName\": \"Pneu Firestone F600 205/55R 16 91V\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010514\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"price\": 427.85\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Checkout",
+					"item": [
+						{
+							"name": "Calcula Frete - Um Produto - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "bad56e35-98cd-45b1-a10d-48f9e4965287",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 717.45,\n    \"total\": 736.76,\n    \"shipping\": 19.31,\n    \"totalWithoutTax\": 736.76,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 717.45,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"displayName\": \"\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"desconto_manual\": \"0\",\n      \"price\": 717.45\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"Entrega 1\",\n    \"prefix\": \"\",\n    \"firstName\": \"Tester Teste\",\n    \"middleName\": \"\",\n    \"lastName\": \"-\",\n    \"suffix\": \"\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"16202-380\",\n    \"address1\": \"Rua Dez|55\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"Birigüi\",\n    \"state\": \"São Paulo\",\n    \"county\": \"João Crevelaro\",\n    \"phoneNumber\": \"(48) 9999-9999\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"repositoryId\": \"11994927\",\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"selectedCountry\": \"BR\",\n    \"selectedState\": \"SP\",\n    \"state_ISOCode\": \"BR-SP\",\n    \"isDefaultAddress\": true,\n    \"tipo\": null\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calcula Frete - Dois Produtos - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2e2958b1-3a94-413b-9f6c-cb2c1e73dca7",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"productIdForShippingSurcharge\": [\n    \"98863\",\n    \"92237\"\n  ],\n  \"priceInfo\": {\n    \"amount\": 1145.3,\n    \"total\": 1169.08,\n    \"shipping\": 23.78,\n    \"totalWithoutTax\": 1169.08,\n    \"currencyCode\": \"BRL\",\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 1145.3,\n    \"orderDiscount\": 0,\n    \"coupons\": []\n  },\n  \"items\": [\n    {\n      \"productId\": \"98863\",\n      \"quantity\": 1,\n      \"repositoryId\": \"\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"124504\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 100,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 953.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 717.45,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 717.45,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"shopperInput\": {},\n      \"displayName\": \"\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010496\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"desconto_manual\": \"0\",\n      \"price\": 717.45\n    },\n    {\n      \"productId\": \"92237\",\n      \"quantity\": 1,\n      \"repositoryId\": \"\",\n      \"availabilityDate\": null,\n      \"catRefId\": \"116995\",\n      \"expanded\": false,\n      \"stockStatus\": true,\n      \"stockState\": \"IN_STOCK\",\n      \"orderableQuantityMessage\": \"\",\n      \"commerceItemQuantity\": 1,\n      \"orderableQuantity\": 10,\n      \"selectedOptions\": [],\n      \"selectedSkuProperties\": [],\n      \"discountInfo\": [],\n      \"rawTotalPrice\": 568.9,\n      \"detailedItemPriceInfo\": [\n        {\n          \"discounted\": false,\n          \"secondaryCurrencyTaxAmount\": 0,\n          \"amount\": 427.85,\n          \"quantity\": 1,\n          \"tax\": 0,\n          \"orderDiscountShare\": 0,\n          \"detailedUnitPrice\": 427.85,\n          \"currencyCode\": \"BRL\"\n        }\n      ],\n      \"externalData\": [],\n      \"addOnItem\": false,\n      \"displayName\": \"\",\n      \"invalid\": false,\n      \"commerceItemId\": \"ci60010514\",\n      \"priceListGroupId\": \"LojaEletro-995\",\n      \"giftWithPurchaseCommerceItemMarkers\": [],\n      \"desconto_manual\": \"0\",\n      \"price\": 427.85\n    }\n  ],\n  \"shippingAddress\": {\n    \"alias\": \"Entrega 1\",\n    \"prefix\": \"\",\n    \"firstName\": \"Tester Teste\",\n    \"middleName\": \"\",\n    \"lastName\": \"-\",\n    \"suffix\": \"\",\n    \"country\": \"Brasil\",\n    \"postalCode\": \"16202-380\",\n    \"address1\": \"Rua Dez|55\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"city\": \"Birigüi\",\n    \"state\": \"São Paulo\",\n    \"county\": \"João Crevelaro\",\n    \"phoneNumber\": \"(48) 9999-9999\",\n    \"email\": null,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"faxNumber\": \"\",\n    \"repositoryId\": \"11994927\",\n    \"isDefaultBillingAddress\": false,\n    \"isDefaultShippingAddress\": false,\n    \"selectedCountry\": \"BR\",\n    \"selectedState\": \"SP\",\n    \"state_ISOCode\": \"BR-SP\",\n    \"isDefaultAddress\": true,\n    \"tipo\": null\n  },\n  \"populateShippingMethods\": true\n}"
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstoreui",
+										"v1",
+										"shippingMethods"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Genco - Envio do pedido",
+			"item": []
+		}
+	]
+}
