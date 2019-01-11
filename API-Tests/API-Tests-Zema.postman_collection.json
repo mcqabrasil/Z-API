@@ -688,71 +688,6 @@
 							"response": []
 						},
 						{
-							"name": "Calcula Frete - Produto Sem Dimensões",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "f6fb709f-cb72-4451-aafc-2fba62893636",
-										"exec": [
-											"pm.test(\"Status da resposta deve ser 200\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"pm.test(\"Resposta deve ter um body\", function () {",
-											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
-											"     pm.response.to.be.withBody;",
-											"     pm.response.to.be.json; ",
-											"});",
-											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
-											"    pm.response.to.not.be.error; ",
-											"    pm.response.to.not.have.jsonBody(\"error\"); ",
-											"});",
-											"",
-											"var jsonData = pm.response.json();",
-											"",
-											"pm.test(\"Quantidade de Tipos de Frete não deve ser Vazio\", function () {",
-											"    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
-											"});",
-											"pm.test(\"O unico frete disponivel deve ser Retirar em loja\", function () {",
-											"    pm.expect(jsonData.items.length).to.eql(1);",
-											"    pm.expect(jsonData.items[0].displayName).to.eql(\"Retirar em Loja\");",
-											"    pm.expect(jsonData.items[0].taxCode).to.eql(\"LOJA\");",
-											"});",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"shippingAddress\": {\n    \"lastName\": \"teste\",\n    \"country\": \"Brasil\",\n    \"address3\": \"\",\n    \"address2\": \"\",\n    \"city\": \"Araxá\",\n    \"prefix\": \"\",\n    \"address1\": \"Rua Celina Souza Silva\",\n    \"defaultCountryCode\": \"BR\",\n    \"postalCode\": 38183123,\n    \"jobTitle\": \"\",\n    \"companyName\": \"\",\n    \"county\": \"Centro\",\n    \"isDefaultAddress\": true,\n    \"suffix\": \"\",\n    \"selectedCountry\": \"BR\",\n    \"firstName\": \"teste\",\n    \"phoneNumber\": \"\",\n    \"alias\": \"\",\n    \"faxNumber\": \"\",\n    \"middleName\": \"\",\n    \"state\": \"MG\",\n    \"selectedState\": \"\",\n    \"email\": \"teste\",\n    \"state_ISOCode\": \"\"\n  },\n  \"priceInfo\": {\n    \"amount\": 827.84,\n    \"total\": 827.84,\n    \"shipping\": 0,\n    \"shippingSurchargeValue\": 0,\n    \"tax\": 0,\n    \"subTotal\": 827.84,\n    \"currencyCode\": \"BRL\",\n    \"totalWithoutTax\": 827.84\n  },\n  \"productIdForShippingSurcharge\": [\n    \"100077\"\n  ],\n  \"items\": [\n    {\n      \"quantity\": 1,\n      \"productId\": \"100077\",\n      \"catRefId\": \"125807\",\n      \"stockStatus\": \"IN_STOCK\",\n      \"price\": 827.84\n    }\n  ],\n  \"populateShippingMethods\": true\n}"
-								},
-								"url": {
-									"raw": "{{URLEnv}}/ccstoreui/v1/shippingMethods",
-									"host": [
-										"{{URLEnv}}"
-									],
-									"path": [
-										"ccstoreui",
-										"v1",
-										"shippingMethods"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Calcula Frete - Sem  Dados de Endereco",
 							"event": [
 								{
@@ -1372,6 +1307,751 @@
 		{
 			"name": "Genco - Envio do pedido",
 			"item": []
+		},
+		{
+			"name": "SSE",
+			"item": [
+				{
+					"name": "ELZ-2202 Get All Store Orders",
+					"item": [
+						{
+							"name": "Login Vendedor - Sucesso Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d1b2cd31-fb19-4337-b120-60139b67dcf2",
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"postman.setEnvironmentVariable(\"AuthToken\",decodeURIComponent(jsonData.token).replace(/\\\"/g,\"\"));",
+											"",
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Token de autenticação não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(\"{{AuthToken}}\").to.be.a('string').that.is.not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Password1",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "jim@sandbox.pagseguro.com.br",
+											"type": "text"
+										},
+										{
+											"key": "origin",
+											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstorex/custom/ccadmin/v1/validateLogin",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstorex",
+										"custom",
+										"ccadmin",
+										"v1",
+										"validateLogin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Pedidos Retirar na Loja - Sucesso",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "75ee4f8c-4735-4ad9-9a46-77451457a98e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "5389f85e-8bae-4bc8-9600-f8c434b83bae",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AuthToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=LojaEletro-108&limit=1&offset=3&origin=ccstore-stage-zcra.oracleoutsourcing.com",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstorex",
+										"custom",
+										"v1",
+										"retirar-loja"
+									],
+									"query": [
+										{
+											"key": "loja",
+											"value": "LojaEletro-108"
+										},
+										{
+											"key": "limit",
+											"value": "1"
+										},
+										{
+											"key": "offset",
+											"value": "3"
+										},
+										{
+											"key": "origin",
+											"value": "ccstore-stage-zcra.oracleoutsourcing.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Pedidos Retirar na Loja - Validação Loja em Branco",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "75ee4f8c-4735-4ad9-9a46-77451457a98e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "5389f85e-8bae-4bc8-9600-f8c434b83bae",
+										"exec": [
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AuthToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=&limit=1&offset=3&origin=ccstore-stage-zcra.oracleoutsourcing.com",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstorex",
+										"custom",
+										"v1",
+										"retirar-loja"
+									],
+									"query": [
+										{
+											"key": "loja",
+											"value": ""
+										},
+										{
+											"key": "limit",
+											"value": "1"
+										},
+										{
+											"key": "offset",
+											"value": "3"
+										},
+										{
+											"key": "origin",
+											"value": "ccstore-stage-zcra.oracleoutsourcing.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Pedidos Retirar na Loja - Unauthorized",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "75ee4f8c-4735-4ad9-9a46-77451457a98e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "5389f85e-8bae-4bc8-9600-f8c434b83bae",
+										"exec": [
+											"pm.test(\"Status da resposta deve ser 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"pm.test(\"Resposta deve ser um erro\", function () {",
+											"    pm.response.to.be.error;",
+											"});",
+											"pm.test(\"Resposta deve conter informação sobre Usuário Não Autenticado\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.message).to.eql(\"The user is not authenticated.\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=LojaEletro-108&limit=1&offset=3&origin=ccstore-stage-zcra.oracleoutsourcing.com",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstorex",
+										"custom",
+										"v1",
+										"retirar-loja"
+									],
+									"query": [
+										{
+											"key": "loja",
+											"value": "LojaEletro-108"
+										},
+										{
+											"key": "limit",
+											"value": "1"
+										},
+										{
+											"key": "offset",
+											"value": "3"
+										},
+										{
+											"key": "origin",
+											"value": "ccstore-stage-zcra.oracleoutsourcing.com"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ELZ-2226 Update Shipping group to NO_Pending_Action",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ELZ-2183 Validate fields from Cadastrar Usuario",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ELZ-2167 Merge Orders Endpoint",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ELZ-2152 Merge the products when the Order is canceled",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ELZ-2123 Validate the order when submit",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ELZ-2127 Login Vendedor",
+					"item": [
+						{
+							"name": "Login Vendedor - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d1b2cd31-fb19-4337-b120-60139b67dcf2",
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"postman.setEnvironmentVariable(\"AuthToken\",decodeURIComponent(jsonData.token).replace(/\\\"/g,\"\"));",
+											"",
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Token de autenticação não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(\"{{AuthToken}}\").to.be.a('string').that.is.not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Password1",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "jim@sandbox.pagseguro.com.br",
+											"type": "text"
+										},
+										{
+											"key": "origin",
+											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstorex/custom/ccadmin/v1/validateLogin",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstorex",
+										"custom",
+										"ccadmin",
+										"v1",
+										"validateLogin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login Vendedor - Validação senha",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d1b2cd31-fb19-4337-b120-60139b67dcf2",
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Status da resposta deve ser 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "jim@sandbox.pagseguro.com.br",
+											"type": "text"
+										},
+										{
+											"key": "origin",
+											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstorex/custom/ccadmin/v1/validateLogin",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstorex",
+										"custom",
+										"ccadmin",
+										"v1",
+										"validateLogin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login Vendedor - Validação username",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d1b2cd31-fb19-4337-b120-60139b67dcf2",
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Status da resposta deve ser 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Password1",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "origin",
+											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstorex/custom/ccadmin/v1/validateLogin",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstorex",
+										"custom",
+										"ccadmin",
+										"v1",
+										"validateLogin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login Cliente PF - Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d1b2cd31-fb19-4337-b120-60139b67dcf2",
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"",
+											"pm.test(\"Status da resposta deve ser 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"Resposta deve ter um body\", function () {",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; ",
+											"});",
+											"pm.test(\"Resposta não deve conter erros no body\", function () { ",
+											"    pm.response.to.not.be.error; ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"pm.test(\"Token de autenticação não deve ser Vazio\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(decodeURIComponent(jsonData.token)).to.be.a('string').that.is.not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "Admin123",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "apitestpf@mailinator.com",
+											"type": "text"
+										},
+										{
+											"key": "origin",
+											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URLEnv}}/ccstorex/custom/ccadmin/v1/validateLogin",
+									"host": [
+										"{{URLEnv}}"
+									],
+									"path": [
+										"ccstorex",
+										"custom",
+										"ccadmin",
+										"v1",
+										"validateLogin"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ELZ-2195 Update Promotions",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "PagSeguro - Pagamento",
+			"item": []
+		},
+		{
+			"name": "RightNow",
+			"item": [
+				{
+					"name": "Profiles",
+					"item": [
+						{
+							"name": "Cadastro",
+							"item": [
+								{
+									"name": "Cadastro - Sucesso",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "https://eletrozemaicsdev-a522860.integration.us2.oraclecloud.com/integration/flowapi/rest/RIGHTNOWCREATEPROFILE/v02/services/rest/connect/v1.4/contacts",
+											"protocol": "https",
+											"host": [
+												"eletrozemaicsdev-a522860",
+												"integration",
+												"us2",
+												"oraclecloud",
+												"com"
+											],
+											"path": [
+												"integration",
+												"flowapi",
+												"rest",
+												"RIGHTNOWCREATEPROFILE",
+												"v02",
+												"services",
+												"rest",
+												"connect",
+												"v1.4",
+												"contacts"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Alteração",
+							"item": [],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Incidentes",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
 		}
 	]
 }
