@@ -4,6 +4,9 @@ node_js:
 
 install:
   - npm install newman
+  
+notifications:
+    slack: mcfadyenbrasil:kbMVbztMC74kPXp8zdSI8w1J
 
 before_script:
   - node --version
