@@ -1376,7 +1376,7 @@
 										},
 										{
 											"key": "origin",
-											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"value": "ccstore-prod-zcra.oracleoutsourcing.com",
 											"type": "text"
 										}
 									]
@@ -1450,7 +1450,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=LojaEletro-108&limit=1&offset=3&origin=ccstore-stage-zcra.oracleoutsourcing.com",
+									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=LojaEletro-108&limit=1&offset=3&origin=ccstore-prod-zcra.oracleoutsourcing.com",
 									"host": [
 										"{{URLEnv}}"
 									],
@@ -1475,7 +1475,7 @@
 										},
 										{
 											"key": "origin",
-											"value": "ccstore-stage-zcra.oracleoutsourcing.com"
+											"value": "ccstore-prod-zcra.oracleoutsourcing.com"
 										}
 									]
 								}
@@ -1526,7 +1526,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=&limit=1&offset=3&origin=ccstore-stage-zcra.oracleoutsourcing.com",
+									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=&limit=1&offset=3&origin=ccstore-prod-zcra.oracleoutsourcing.com",
 									"host": [
 										"{{URLEnv}}"
 									],
@@ -1551,7 +1551,7 @@
 										},
 										{
 											"key": "origin",
-											"value": "ccstore-stage-zcra.oracleoutsourcing.com"
+											"value": "ccstore-prod-zcra.oracleoutsourcing.com"
 										}
 									]
 								}
@@ -1609,7 +1609,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=LojaEletro-108&limit=1&offset=3&origin=ccstore-stage-zcra.oracleoutsourcing.com",
+									"raw": "{{URLEnv}}/ccstorex/custom/v1/retirar-loja?loja=LojaEletro-108&limit=1&offset=3&origin=ccstore-prod-zcra.oracleoutsourcing.com",
 									"host": [
 										"{{URLEnv}}"
 									],
@@ -1634,7 +1634,7 @@
 										},
 										{
 											"key": "origin",
-											"value": "ccstore-stage-zcra.oracleoutsourcing.com"
+											"value": "ccstore-prod-zcra.oracleoutsourcing.com"
 										}
 									]
 								}
@@ -1734,7 +1734,7 @@
 										},
 										{
 											"key": "origin",
-											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"value": "ccstore-prod-zcra.oracleoutsourcing.com",
 											"type": "text"
 										}
 									]
@@ -1804,7 +1804,7 @@
 										},
 										{
 											"key": "origin",
-											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"value": "ccstore-prod-zcra.oracleoutsourcing.com",
 											"type": "text"
 										}
 									]
@@ -1874,7 +1874,7 @@
 										},
 										{
 											"key": "origin",
-											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"value": "ccstore-prod-zcra.oracleoutsourcing.com",
 											"type": "text"
 										}
 									]
@@ -1956,7 +1956,7 @@
 										},
 										{
 											"key": "origin",
-											"value": "ccstore-stage-zcra.oracleoutsourcing.com",
+											"value": "ccstore-prod-zcra.oracleoutsourcing.com",
 											"type": "text"
 										}
 									]
@@ -2010,10 +2010,10 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "https://eletrozemaicsdev-a522860.integration.us2.oraclecloud.com/integration/flowapi/rest/RIGHTNOWCREATEPROFILE/v02/services/rest/connect/v1.4/contacts",
+											"raw": "https://eletrozemaics-a522860.integration.us2.oraclecloud.com/integration/flowapi/rest/RIGHTNOWCREATEPROFILE/v02/services/rest/connect/v1.4/contacts",
 											"protocol": "https",
 											"host": [
-												"eletrozemaicsdev-a522860",
+												"eletrozemaics-a522860",
 												"integration",
 												"us2",
 												"oraclecloud",
